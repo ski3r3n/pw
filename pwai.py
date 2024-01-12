@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openaiapikey = os.getenv("openaiapikey")
+openaiapikey = os.getenv("OPENAIAPIKEY")
 client = OpenAI(api_key=openaiapikey)
 
 temprompt = input("Your prompt: ")
