@@ -12,11 +12,11 @@ temprompt = input("Your prompt: ")
 longprompt = '''
 
 '''
-# You sumarise teacher's lectures for students to understand. You make sure to include important points. Summarise whatever prompt is given
+#
 completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "Answer whatever is given"},
+        {"role": "system", "content": "You sumarise teacher's lectures for students to understand. You make sure to include important points. Summarise whatever prompt is given, in bullet point format, ranked from most important to least important"},
         {"role": "user", "content": temprompt}
     ]
 )
