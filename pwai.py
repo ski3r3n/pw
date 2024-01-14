@@ -3,21 +3,34 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
 openaiapikey = os.getenv("OPENAIAPIKEY")
+
+c = OpenAI(api_key=openaiapikey)
+audio_file = open("Recording(4).m4a", "rb")
+
+transcript = c.audio.transcriptions.create(
+    model="whisper-1",
+    file=audio_file,
+    response_format="text",
+    prompt="answer in english"
+)
+
+print(f"\n\nChatGPT:\n{transcript}")
+
 client = OpenAI(api_key=openaiapikey)
 
-temprompt = input("Your prompt: ")
+# temprompt = input("Your prompt: ")
 
 longprompt = '''
 
 '''
+audioprompt = str(transcript) + "answer in english"
 #
 completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": "You sumarise teacher's lectures for students to understand. You make sure to include important points. Summarise whatever prompt is given, in bullet point format, ranked from most important to least important"},
-        {"role": "user", "content": temprompt}
+        {"role": "system", "content": "You always answer in english. You sumarise teacher's lectures for students to understand. You make sure to include important points. Summarise whatever prompt is given, in bullet point format, ranked from most important to least important. Answer in english."},
+        {"role": "user", "content": audioprompt}
     ]
 )
 
