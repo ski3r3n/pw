@@ -20,11 +20,11 @@ print(f"\n\nChatGPT:\n{transcript}")
 client = OpenAI(api_key=openaiapikey)
 
 # temprompt = input("Your prompt: ")
-
+lang = input('what language u answer in: ')
 longprompt = '''
 
 '''
-audioprompt = str(transcript) + "answer in english"
+audioprompt = str(transcript) + f"answer in {lang}"
 #
 completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
